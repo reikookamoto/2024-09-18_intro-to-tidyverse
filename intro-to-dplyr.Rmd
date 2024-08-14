@@ -1,0 +1,63 @@
+---
+title: "Introduction to dplyr"
+author: "Reiko Okamoto"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 👋Welcome to the tidyverse
+
+#### ***What is the tidyverse?***
+
+The [tidyverse](https://tidyverse.tidyverse.org/) is a collection of R packages designed for data science. Arguably, two of the most popular packages in the tidyverse are [dplyr](https://dplyr.tidyverse.org/) for data manipulation and [ggplot2](https://ggplot2.tidyverse.org/) for data visualization. These are also the packages that we are covering today!
+
+***Why learn it?***
+
+The skills you gain are not just limited to R. The concepts, like filtering data and creating plots, are applicable to other languages like SQL and Python. This makes it easier to pick up other tools and languages later. Additionally, the tidyverse is in tune with open science practices, helping you create analyses that are more accessible, transparent, and reproducible.
+
+***Keep in mind...***
+
+There's no expectation for you to memorize everything. Even experienced programmers don't have every function memorized - they're constantly googling things! My goal today is to help you get comfortable with, and hopefully interested in, using the tidyverse for data analysis.
+
+## 🐧Meet the Palmer penguins
+
+![](imgs/penguins.png){width="500"}
+
+We'll use the **penguins** data set from the [palmerpenguins](https://allisonhorst.github.io/palmerpenguins/) package. It contains measurements for adult penguins observed in the islands in the Palmer Archipelago off the Antarctic Peninsula. The data were collected and made available by Dr. Kristen Gorman and the Palmer Station Long Term Ecological Research (LTER) Program. This data set is great for learning because it's small enough to be manageable for beginners but contains a range of different types of data and features.
+
+💻Load the necessary packages:
+
+```{r}
+library(tidyverse)
+library(palmerpenguins)
+```
+
+💻Open the data set documentation:
+
+```{r}
+?penguins
+```
+
+![](imgs/culmen_depth.png){width="500"}
+
+## 1️⃣Get a glimpse of your data: glimpse()
+
+💻Inspect the data using the [glimpse()](https://dplyr.tidyverse.org/reference/glimpse.html) function.
+
+```{r}
+glimpse(penguins)
+```
+
+-   *How many rows?*
+
+-   *How many columns?*
+
+-   *How many data types?*
+
+-   *Are there any missing values?*
+
+## 2️⃣Keep or drop columns: select()
