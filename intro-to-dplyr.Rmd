@@ -61,3 +61,114 @@ glimpse(penguins)
 -   *Are there any missing values?*
 
 ## 2️⃣Keep or drop columns: select()
+
+Sometimes, you only need to work with a few specific columns instead of the entire data. The [select()](https://dplyr.tidyverse.org/reference/select.html) function makes it easy to do just that. It allows you to focus on the columns you need and ignore the rest, making your code cleaner.
+
+💻Select one column by name:
+
+```{r}
+select(penguins, species)
+```
+
+💻Select two columns by name:
+
+```{r}
+select(penguins, species, island)
+select(penguins, c(species, island))
+```
+
+💻Select all columns except certain ones:
+
+```{r}
+select(penguins, -species, -island)
+```
+
+💻Select columns that start with "bill":
+
+```{r}
+select(penguins, starts_with("bill"))
+```
+
+Similar functions like ends_with() and contains() are also available to select columns based on the ending or presence of specific characters.
+
+💻Select numeric variables:
+
+```{r}
+select(penguins, where(is.numeric))
+```
+
+## 3️⃣Keep rows that match a condition: filter()
+
+Filtering data is a common task in data analysis. Use the [filter()](https://dplyr.tidyverse.org/reference/filter.html) function to focus on specific observations.
+
+💻Show only the penguins of the Gentoo species:
+
+```{r}
+filter(penguins, species == "Gentoo")
+```
+
+💻Find all Adelie penguins that are also on Torgersen Island:
+
+```{r}
+filter(penguins, species == "Adelie", island == "Torgersen")
+```
+
+The comma acts as an AND operator, meaning both conditions must be true for a row to be included.
+
+💻Find all penguins that either Adelie or Gentoo:
+
+```{r}
+filter(penguins, species == "Adelie" | species == "Gentoo")
+```
+
+The vertical bar acts as an OR operator, meaning a row is returned if any of the conditions are true.
+
+#### 📝Exercise 1
+
+1.  Select the "sex" and "year" columns from the data.
+
+2.  Filter the data to show only the rows where "flipper_length_mm" is greater than 200.
+
+3.  Filter the data to find all penguins that are either on Biscoe Island or Torgersen Island.
+
+    ```{r}
+
+    ```
+
+## 4️⃣Pipes
+
+💻Filter the data to only include Adelie penguins, and then keep only the columns that start with "bill":
+
+```{r}
+select(filter(penguins, species == "Adelie"), starts_with("bill"))
+```
+
+This works, but it can get difficult to read, especially as your code grows more complex. The nested functions force you to read the code inside-out, making it less intuitive
+
+💻Use the pipe to do the same thing in a more streamlined way:
+
+```{r}
+penguins |> 
+  filter(species == "Adelie") |> 
+  select(starts_with("bill"))
+```
+
+The pipe allows us to pass the output of one function directly to the next. This approach makes your code easier to read because the operations flow left to right, top to bottom.
+
+Keyboard shortcuts for the pipe:
+
+-   Windows: Ctrl + Shift + M
+
+-   Mac: Cmd + Shift + M
+
+#### 📝Exercise 2
+
+Filter the data include only female penguins with "bill_length_mm" less than or equal to 40, and then select the "species" and "bill_length_mm" columns.
+
+```{r}
+penguins |> 
+  filter(sex == "female", bill_length_mm <= 40) |> 
+  select(species, bill_length_mm)
+```
+
+## 
