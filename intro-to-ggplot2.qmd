@@ -1,0 +1,11 @@
+---
+title: "Introduction to ggplot2"
+format: html
+editor: visual
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 🎨 Introduction to ggplot2
