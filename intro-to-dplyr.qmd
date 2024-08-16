@@ -119,6 +119,7 @@ The comma acts as an AND operator, meaning both conditions must be true for a ro
 
 ```{r}
 filter(penguins, species == "Adelie" | species == "Gentoo")
+filter(penguins, species != "Chinstrap")
 ```
 
 The vertical bar acts as an OR operator, meaning a row is returned if any of the conditions are true.
@@ -163,7 +164,7 @@ Keyboard shortcuts for the pipe:
 
 #### 📝Exercise 2
 
-Filter the data include only female penguins with "bill_length_mm" less than or equal to 40, and then select the "species" and "bill_length_mm" columns.
+Using the pipe, filter the data to include only female penguins with "bill_length_mm" less than or equal to 40, and then select the "species" and "bill_length_mm" columns.
 
 ```{r}
 penguins |> 
@@ -171,4 +172,90 @@ penguins |>
   select(species, bill_length_mm)
 ```
 
-## 
+## 5️⃣Create and modify columns: mutate()
+
+In data analysis, it's common to derive new variables from existing ones. The [mutate()](https://dplyr.tidyverse.org/reference/mutate.html) function is essential for these tasks.
+
+💻Create a new column called "body_mass_kg" (i.e., the "body_mass_g" column converted from grams to kilograms):
+
+```{r}
+penguins |> 
+  mutate(body_mass_kg = body_mass_g / 1000)
+```
+
+By separating the new columns with a comma, we can create multiple new variables in one function call.
+
+💻Use [if_else()](https://dplyr.tidyverse.org/reference/if_else.html) to create a column called "large_penguin", which indicates whether the penguin's body mass is greater than 4,000 grams:
+
+```{r}
+penguins |> 
+  mutate(large_penguin = if_else(body_mass_g > 4000, TRUE, FALSE))
+```
+
+💻Use [case_when()](https://dplyr.tidyverse.org/reference/case_when.html) to categorize the penguins based on their body mass:
+
+```{r}
+penguins |> 
+  mutate(size_category = case_when(
+    body_mass_g < 3000 ~ "small",
+    body_mass_g < 4000 ~ "medium",
+    body_mass_g >= 4000 ~ "large",
+    .default = "unknown"
+  ))
+```
+
+if_else() is best for binary conditions where you need to choose between two outcomes. In contrast, case_when() is ideal for handling multiple conditions, allowing you to return different values based on various criteria.
+
+💻Use [across()](https://dplyr.tidyverse.org/reference/across.html) to efficiently round values in multiple columns simultaneously:
+
+```{r}
+penguins |> 
+  mutate(across(.cols = c(bill_length_mm, bill_depth_mm), .fns = round))
+```
+
+#### 📝Exercise 3
+
+1.  Create a new column called "bill_depth_cm" that converts the "bill_depth_mm" columns from millimeters to centimeters.
+2.  Create a new column called "flipper_size" that categorizes penguins as short, average, or long based on their "flipper_length_mm". *Hint: You can define short as less than 190 mm, average as between 190 and 210 mm, and long as greater than 210 mm.*
+
+## 6️⃣Compute summary statistics: summarise()
+
+We often need to summarize our data to understand key characteristics (e.g., measures of central tendency, measures of variability, frequency). The [summarise()](https://dplyr.tidyverse.org/reference/summarise.html) function lets us calculate these summary statistics efficiently.
+
+💻Calculate the mean body mass for all the penguins in the data.
+
+```{r}
+penguins |> 
+  summarise(mean_body_mass = mean(body_mass_g, na.rm = TRUE))
+```
+
+The function creates a new data frame with a single row containing the summary statistic.
+
+💻Calculate the mean and standard deviation of body mass at the same time:
+
+```{r}
+penguins |> 
+  summarise(mean_body_mass = mean(body_mass_g, na.rm = TRUE),
+            sd_body_mass = sd(body_mass_g, na.rm = TRUE))
+```
+
+Similar to what we've seen in other functions, you can create multiple summaries in a single step by separating them with commas.
+
+## 7️⃣Group by one or more variables: group_by()
+
+## 📚Resources
+
+| Function              | Description |
+|-----------------------|-------------|
+| dplyr::glimpse()      |             |
+| dplyr::select()       |             |
+| dplyr::filter()       |             |
+| dplyr::mutate()       |             |
+| dplyr::summarise()    |             |
+| dplyr::group_by()     |             |
+| dplyr::count()        |             |
+| dplyr::arrange()      |             |
+| dplyr::pull()         |             |
+| dplyr::slice()        |             |
+| tidyr::pivot_longer() |             |
+| tidyr::pivot_wider()  |             |
