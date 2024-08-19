@@ -1,6 +1,8 @@
 ---
 title: "Introduction to ggplot2"
-format: html
+author: "Reiko Okamoto"
+date: "`r Sys.Date()`"
+format: gfm
 editor: visual
 ---
 
@@ -8,4 +10,119 @@ editor: visual
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## 🎨 Introduction to ggplot2
+## 🎨Introduction to ggplot2
+
+ggplot2 helps you create a wide range of static, informative, and visually appealing graphics. Its name comes from the Grammar of Graphics, which is a framework for building plots in a structured way. You build a plot incrementally by adding layers like data points, axes, colours, and labels.
+
+💻Load the necessary packages:
+
+```{r}
+library(tidyverse)
+library(RColorBrewer)
+```
+
+## 1️⃣Explore the sample data
+
+![](imgs/antoine-schibler-H84rHbx7IP0-unsplash.jpg){fig-align="center" width="500"}
+
+We'll use a data set sourced from a [GitHub repository](https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-02-26), which originally retrieved the data from the SNCF open data portal. SCNF, founded in 1938, is France's national railway company. It operates systems like the TGV high-speed trains and regional TER services.
+
+💻Read in the data using the [`read_csv()`](https://readr.tidyverse.org/reference/read_delim.html) function from the [readr](https://readr.tidyverse.org/) package:
+
+```{r}
+trains_df <- read_csv("french_trains.csv")
+trains_df
+```
+
+🧠Explore the type and description of each variable:
+
+| Variable                  | Type      | Description                          |
+|--------------------------|-----------------------|-----------------------|
+| `year`                    | double    | Year of observation                  |
+| `month`                   | double    | Month of obsrevation                 |
+| `service`                 | character | Type of service                      |
+| `departure_station`       | character | Departure station                    |
+| `arrival_station`         | character | Arrival station                      |
+| `journey_time_avg`        | double    | Average journey time (in minutes)    |
+| `total_num_trips`         | double    | Total number of trips recorded       |
+| `avg_delay_all_departing` | double    | Average departure delay (in minutes) |
+| `avg_delay_all_arriving`  | double    | Average arrival delay (in minutes)   |
+| `num_late_at_departure`   | double    | Number of trains that departed late  |
+| `num_arriving_late`       | double    | Number of trains that arrived late   |
+
+The data set contains **monthly summaries** train journeys from 2015 to 2018. Each row represents aggregated data for a specific route and month, including average journey times, delays, and the total number of trips. This structure will allow us to explore trends over time and visualize overall patterns in travel travel.
+
+💻Inspect the first and last parts of the data set:
+
+```{r}
+head(trains_df)
+tail(trains_df)
+```
+
+-   The first row captures information on trips from **AIX EN PROVENCE TGV** to **PARIS LYON** for the month of **JANUARY 2015**
+
+-   The last row captures information on trips from **ZURICH** to **PARIS LYON** for the month of **NOVEMBER 2018**
+
+## 2️⃣Histograms
+
+💻Create a histogram to visualize the distribution of average journey time:
+
+```{r}
+ggplot(trains_df, aes(x = journey_time_avg)) +
+  geom_histogram(bins = 20)
+```
+
+We can see that the distribution of average journey time is right-skewed.
+
+Breaking down the code:
+
+-   The first argument in ggplot() indicates which data frame we want to use.
+
+-   The second argument, called the aesthetic mapping, specifies how the columns of the data frame should be mapped to different parts of the plot (e.g., x-axis, y-axis, colour, etc.).
+
+-   We use the `+` operator to add each layer to the plot.
+
+-   `geom_histogram()` is a geometric object (or "geom") that decides how the mapped data is displayed—in this case, as a histogram.
+
+## 3️⃣Scatter plots
+
+Scatter plots are a powerful way to visualize the relationship between two continuous variables.
+
+💻Create a scatter plot to visualize the relationship between the average journey time and the number of trains that departed late:
+
+```{r}
+trains_df |> 
+  ggplot(aes(x = journey_time_avg, y = num_late_at_departure)) +
+  geom_point()
+```
+
+Sometimes, when data points overlap too much, it can be challenging to see the individual points. This is called overplotting.
+
+💻To address this, adjust the transparency of the points using the `alpha` argument:
+
+```{r}
+trains_df |> 
+  ggplot(aes(x = journey_time_avg, y = num_late_at_departure)) +
+  geom_point(alpha = 0.2)
+```
+
+💻Make the plot more visually appealing by changing the colour of the points and adding a title and axis labels:
+
+```{r}
+trains_df |> 
+  ggplot(aes(x = journey_time_avg, y = num_late_at_departure)) +
+  geom_point(alpha = 0.2, colour = "#3182bd") +
+  labs(
+    title = "French train punctuality",
+    x = "Average journey time (in minutes)",
+    y = "Number of trains that departed late"
+  )
+```
+
+#### 📝**Exercise 1**
+
+Create a scatter plot to visualize the relationship between two other continuous variables in the data. This time, change the default size of the points by using the `size` argument.
+
+```{r}
+
+```

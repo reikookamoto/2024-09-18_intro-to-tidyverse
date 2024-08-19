@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Reiko Okamoto">
-<meta name="dcterms.date" content="2024-08-16">
+<meta name="dcterms.date" content="2024-08-19">
 
 <title>Introduction to dplyr</title>
 <style>
@@ -98,7 +98,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 16, 2024</p>
+      <p class="date">August 19, 2024</p>
     </div>
   </div>
   
@@ -146,7 +146,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>You only need to install a package once, but you’ll need to reload it every time you start a new session.</p>
+<p>We only need to install a package once, but we’ll need to reload it every time we start a new session.</p>
 <p>💻Open the data set documentation:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>?penguins</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -160,8 +160,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </section>
-<section id="get-a-glimpse-of-your-data-glimpse" class="level2">
-<h2 class="anchored" data-anchor-id="get-a-glimpse-of-your-data-glimpse">1️⃣Get a glimpse of your data: glimpse()</h2>
+<section id="get-a-glimpse-of-our-data-glimpse" class="level2">
+<h2 class="anchored" data-anchor-id="get-a-glimpse-of-our-data-glimpse">1️⃣Get a glimpse of our data: glimpse()</h2>
 <p>💻Inspect the data using the <a href="https://dplyr.tidyverse.org/reference/glimpse.html"><code>glimpse()</code></a> function.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -187,7 +187,7 @@ $ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 
 </section>
 <section id="keep-or-drop-columns-select" class="level2">
 <h2 class="anchored" data-anchor-id="keep-or-drop-columns-select">2️⃣Keep or drop columns: select()</h2>
-<p>Sometimes, you only need to work with a few specific columns instead of the entire data. The <a href="https://dplyr.tidyverse.org/reference/select.html"><code>select()</code></a> function makes it easy to do just that. It allows you to focus on the columns you need and ignore the rest, making your code cleaner.</p>
+<p>Sometimes, we only need to work with a few specific columns instead of the entire data. The <a href="https://dplyr.tidyverse.org/reference/select.html"><code>select()</code></a> function makes it easy to do just that. It allows us to focus on the columns we need and ignore the rest, making our code cleaner.</p>
 <p>💻Select one column by name:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(penguins, species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -479,7 +479,7 @@ $ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 
 # ℹ 142 more rows</code></pre>
 </div>
 </div>
-<p>This works, but it can get difficult to read, especially as your code grows more complex. The nested functions force you to read the code inside-out, making it less intuitive</p>
+<p>This works, but it can get difficult to read, especially as our code grows more complex. The nested functions force us to read the code inside-out, making it less intuitive</p>
 <p>💻Use the pipe to do the same thing in a more streamlined way:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
@@ -502,7 +502,7 @@ $ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 
 # ℹ 142 more rows</code></pre>
 </div>
 </div>
-<p>The pipe allows us to pass the output of one function directly to the next. This approach makes your code easier to read because the operations flow left to right, top to bottom.</p>
+<p>The pipe allows us to pass the output of one function directly to the next. This approach makes our code easier to read because the operations flow left to right, top to bottom.</p>
 <p>Keyboard shortcuts for the pipe:</p>
 <ul>
 <li><p>Windows: Ctrl + Shift + M</p></li>
@@ -609,7 +609,7 @@ $ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 
 # ℹ 3 more variables: sex &lt;fct&gt;, year &lt;int&gt;, size_category &lt;chr&gt;</code></pre>
 </div>
 </div>
-<p><code>if_else()</code> is best for binary conditions where you need to choose between two outcomes. In contrast, <code>case_when()</code> is ideal for handling multiple conditions, allowing you to return different values based on various criteria.</p>
+<p><code>if_else()</code> is best for binary conditions where we need to choose between two outcomes. In contrast, <code>case_when()</code> is ideal for handling multiple conditions, allowing us to return different values based on various criteria.</p>
 <p>💻Use <a href="https://dplyr.tidyverse.org/reference/across.html"><code>across()</code></a> to efficiently round values in multiple columns simultaneously:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
@@ -636,7 +636,7 @@ $ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 
 <h4 class="anchored" data-anchor-id="exercise-3">📝Exercise 3</h4>
 <ol type="1">
 <li><p>Create a new column called <code>bill_depth_cm</code> that converts the <code>bill_depth_mm</code> columns from millimeters to centimeters.</p></li>
-<li><p>Create a new column called <code>flipper_size</code> that categorizes penguins as short, average, or long based on their <code>flipper_length_mm</code>. Hint: You can define short as less than 190 mm, average as between 190 and 210 mm, and long as greater than 210 mm.</p>
+<li><p>Create a new column called <code>flipper_size</code> that categorizes penguins as short, average, or long based on their <code>flipper_length_mm</code>. Hint: Define short as less than 190 mm, average as between 190 and 210 mm, and long as greater than 210 mm.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
 <span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bill_depth_cm =</span> bill_depth_mm <span class="sc">/</span> <span class="fl">0.1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -712,11 +712,11 @@ $ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 
 1          2700          6300</code></pre>
 </div>
 </div>
-<p>Similar to what we’ve seen in other functions, you can create multiple summaries in a single step by separating them with commas.</p>
+<p>Similar to what we’ve seen in other functions, we can create multiple summaries in a single step by separating them with commas.</p>
 </section>
 <section id="group-by-one-or-more-variables-group_by" class="level2">
 <h2 class="anchored" data-anchor-id="group-by-one-or-more-variables-group_by">7️⃣Group by one or more variables: group_by()</h2>
-<p>In data analysis, a common task is to split your data into groups, apply a function to each group, and then combine the results. This approach is known as the split-apply-combine paradigm. The <a href="https://dplyr.tidyverse.org/reference/group_by.html"><code>group_by()</code></a> function helps us achieve this by allowing us to specify how we want to split our data into groups.</p>
+<p>In data analysis, a common task is to split our data into groups, apply a function to each group, and then combine the results. This approach is known as the split-apply-combine paradigm. The <a href="https://dplyr.tidyverse.org/reference/group_by.html"><code>group_by()</code></a> function helps us achieve this by allowing us to specify how we want to split our data into groups.</p>
 <p>💻Calculate mean body mass for each species:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
@@ -784,7 +784,7 @@ $ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 
 8 Gentoo    &lt;NA&gt;            4588.         338.</code></pre>
 </div>
 </div>
-<p>By default, when you apply a grouping with multiple factors, dplyr will keep the last level of grouping after the summary. Here, the output is still grouped by <code>species</code>. To remove grouping from a data frame, use the <code>ungroup()</code> function or the <code>.groups  = "drop"</code> argument in the <code>summarise()</code> function. Both methods will allow you to continue working with the data as a regular data frame.</p>
+<p>By default, when we apply a grouping with multiple factors, dplyr will keep the last level of grouping after the summary. Here, the output is still grouped by <code>species</code>. To remove grouping from a data frame, use the <code>ungroup()</code> function or the <code>.groups  = "drop"</code> argument in the <code>summarise()</code> function. Both methods will allow us to continue working with the data as a regular data frame.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># option 1</span></span>
 <span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
@@ -819,7 +819,7 @@ $ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 
 </section>
 <section id="sort-rows-and-extract-specific-values-arrange-slice-pull" class="level2">
 <h2 class="anchored" data-anchor-id="sort-rows-and-extract-specific-values-arrange-slice-pull">8️⃣Sort rows and extract specific values: arrange(), slice(), pull()</h2>
-<p>Sometimes, you’re interested in extracting a particular value from a data frame, like finding the largest or smallest value in a column.</p>
+<p>Sometimes, we’re interested in extracting a particular value from a data frame, like finding the largest or smallest value in a column.</p>
 <ol type="1">
 <li><p>💻Use the <a href="https://dplyr.tidyverse.org/reference/arrange.html"><code>arrange()</code></a> function to reorder our data by <code>mean_body_mass</code> in descending order</p></li>
 <li><p>💻Once our data is sorted, use <a href="https://dplyr.tidyverse.org/reference/slice.html"><code>slice()</code></a> to retrieve the row with the largest mean body mass</p></li>
@@ -867,23 +867,35 @@ $ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 
 <section id="bonus-lengthen-and-widen-data-pivot_longer-pivot_wider" class="level2">
 <h2 class="anchored" data-anchor-id="bonus-lengthen-and-widen-data-pivot_longer-pivot_wider">🌟Bonus: lengthen and widen data: pivot_longer(), pivot_wider()</h2>
 <p>The <a href="https://tidyr.tidyverse.org/">tidyr</a> package is another key component of the tidyverse. It focuses on reshaping data to ensure it’s in the right format for analysis.</p>
-<p>Sometimes we need data in a “long” format (more rows, fewer columns) for certain analyses, or in a “wide” format (more columns, fewer rows) for others. For example, a wide data set might have separate columns for different measurements (e.g., bill length, flipper length), but for some analyses or visualizations, you might need to convert this into a long format where all measurements are in a single column, with another column specifying the measurement type.</p>
+<p>Sometimes we need data in a “long” format (more rows, fewer columns) for certain analyses, or in a “wide” format (more columns, fewer rows) for others. For example, a wide data set might have separate columns for different measurements (e.g., bill length, flipper length), but for some analyses or visualizations, we might need to convert this into a long format where all measurements are in a single column, with another column specifying the measurement type.</p>
 <p>Imagine our observation of interest is the measurement itself, rather than the penguin…</p>
 <p>💻Use the <a href="https://tidyr.tidyverse.org/reference/pivot_longer.html"><code>pivot_longer()</code></a> function to reshape the <code>penguins</code> data so that all the measurements related to the penguins are in a single column, and another column indicates what measurement type it is:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>penguins_long <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span> </span>
-<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
-<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">ends_with</span>(<span class="st">"_mm"</span>) <span class="sc">|</span> <span class="fu">ends_with</span>(<span class="st">"_g"</span>),</span>
-<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"measurement_type"</span>,</span>
-<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"value"</span></span>
-<span id="cb73-6"><a href="#cb73-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">row_number</span>()) <span class="sc">|&gt;</span> </span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">ends_with</span>(<span class="st">"_mm"</span>) <span class="sc">|</span> <span class="fu">ends_with</span>(<span class="st">"_g"</span>),</span>
+<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"measurement_type"</span>,</span>
+<span id="cb73-6"><a href="#cb73-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"value"</span></span>
+<span id="cb73-7"><a href="#cb73-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>What if we want to go back to the original wide format?</p>
 <p>💻Use the <a href="https://tidyr.tidyverse.org/reference/pivot_wider.html"><code>pivot_wider()</code></a> function to reverse the process:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>penguins_wide <span class="ot">&lt;-</span> penguins_long <span class="sc">|&gt;</span> </span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> measurement_type,</span>
+<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> value</span>
+<span id="cb74-5"><a href="#cb74-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="resources" class="level2">
 <h2 class="anchored" data-anchor-id="resources">📚Resources</h2>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 31%">
+<col style="width: 68%">
+</colgroup>
 <thead>
 <tr class="header">
 <th>Function</th>
@@ -893,54 +905,57 @@ $ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 
 <tbody>
 <tr class="odd">
 <td>dplyr::glimpse()</td>
-<td></td>
+<td>Get a glimpse of your data</td>
 </tr>
 <tr class="even">
 <td>dplyr::select()</td>
-<td></td>
+<td>Keep or drop columns using their names and types</td>
 </tr>
 <tr class="odd">
 <td>dplyr::filter()</td>
-<td></td>
+<td>Keep rows that match a condition</td>
 </tr>
 <tr class="even">
 <td>dplyr::mutate()</td>
-<td></td>
+<td>Create, modify, and delete columns</td>
 </tr>
 <tr class="odd">
 <td>dplyr::summarise()</td>
-<td></td>
+<td>Summarise each group down to one row</td>
 </tr>
 <tr class="even">
 <td>dplyr::group_by()</td>
-<td></td>
+<td>Group by one or more variables</td>
 </tr>
 <tr class="odd">
 <td>dplyr::count()</td>
-<td></td>
+<td>Count the observations in each group</td>
 </tr>
 <tr class="even">
 <td>dplyr::arrange()</td>
-<td></td>
+<td>Order rows using column values</td>
 </tr>
 <tr class="odd">
-<td>dplyr::pull()</td>
-<td></td>
+<td>dplyr::slice()</td>
+<td>Subset rows using their positions</td>
 </tr>
 <tr class="even">
-<td>dplyr::slice()</td>
-<td></td>
+<td>dplyr::pull()</td>
+<td>Extract a single column</td>
 </tr>
 <tr class="odd">
 <td>tidyr::pivot_longer()</td>
-<td></td>
+<td>Pivot data from wide to long</td>
 </tr>
 <tr class="even">
 <td>tidyr::pivot_wider()</td>
-<td></td>
+<td>Pivot data from long to wide</td>
 </tr>
 </tbody>
 </table>
+<ul>
+<li><a href="https://rstudio.github.io/cheatsheets/html/data-transformation.html?_gl=1*1foigmt*_ga*Mjg1MTU3NDY3LjE3MDU2OTExOTY.*_ga_2C0WZ1JHG0*MTcyNDA3ODA5Ni4yMy4xLjE3MjQwNzgxNDkuMC4wLjA.">Data transformation with dplyr cheatsheet</a></li>
+</ul>
 </section>
 
 </main>

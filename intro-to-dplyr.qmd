@@ -2,7 +2,8 @@
 title: "Introduction to dplyr"
 author: "Reiko Okamoto"
 date: "`r Sys.Date()`"
-output: github_document
+format: gfm
+editor: visual
 ---
 
 ```{r setup, include=FALSE}
@@ -36,7 +37,7 @@ library(tidyverse)
 library(palmerpenguins)
 ```
 
-You only need to install a package once, but you'll need to reload it every time you start a new session.
+We only need to install a package once, but we'll need to reload it every time we start a new session.
 
 💻Open the data set documentation:
 
@@ -46,7 +47,7 @@ You only need to install a package once, but you'll need to reload it every time
 
 ![](imgs/culmen_depth.png){fig-align="center" width="500"}
 
-## 1️⃣Get a glimpse of your data: glimpse()
+## 1️⃣Get a glimpse of our data: glimpse()
 
 💻Inspect the data using the [`glimpse()`](https://dplyr.tidyverse.org/reference/glimpse.html) function.
 
@@ -64,7 +65,7 @@ glimpse(penguins)
 
 ## 2️⃣Keep or drop columns: select()
 
-Sometimes, you only need to work with a few specific columns instead of the entire data. The [`select()`](https://dplyr.tidyverse.org/reference/select.html) function makes it easy to do just that. It allows you to focus on the columns you need and ignore the rest, making your code cleaner.
+Sometimes, we only need to work with a few specific columns instead of the entire data. The [`select()`](https://dplyr.tidyverse.org/reference/select.html) function makes it easy to do just that. It allows us to focus on the columns we need and ignore the rest, making our code cleaner.
 
 💻Select one column by name:
 
@@ -150,7 +151,7 @@ The vertical bar acts as an OR operator, meaning a row is returned if any of the
 select(filter(penguins, species == "Adelie"), starts_with("bill"))
 ```
 
-This works, but it can get difficult to read, especially as your code grows more complex. The nested functions force you to read the code inside-out, making it less intuitive
+This works, but it can get difficult to read, especially as our code grows more complex. The nested functions force us to read the code inside-out, making it less intuitive
 
 💻Use the pipe to do the same thing in a more streamlined way:
 
@@ -160,7 +161,7 @@ penguins |>
   select(starts_with("bill"))
 ```
 
-The pipe allows us to pass the output of one function directly to the next. This approach makes your code easier to read because the operations flow left to right, top to bottom.
+The pipe allows us to pass the output of one function directly to the next. This approach makes our code easier to read because the operations flow left to right, top to bottom.
 
 Keyboard shortcuts for the pipe:
 
@@ -210,7 +211,7 @@ penguins |>
   ))
 ```
 
-`if_else()` is best for binary conditions where you need to choose between two outcomes. In contrast, `case_when()` is ideal for handling multiple conditions, allowing you to return different values based on various criteria.
+`if_else()` is best for binary conditions where we need to choose between two outcomes. In contrast, `case_when()` is ideal for handling multiple conditions, allowing us to return different values based on various criteria.
 
 💻Use [`across()`](https://dplyr.tidyverse.org/reference/across.html) to efficiently round values in multiple columns simultaneously:
 
@@ -223,7 +224,7 @@ penguins |>
 
 1.  Create a new column called `bill_depth_cm` that converts the `bill_depth_mm` columns from millimeters to centimeters.
 
-2.  Create a new column called `flipper_size` that categorizes penguins as short, average, or long based on their `flipper_length_mm`. Hint: You can define short as less than 190 mm, average as between 190 and 210 mm, and long as greater than 210 mm.
+2.  Create a new column called `flipper_size` that categorizes penguins as short, average, or long based on their `flipper_length_mm`. Hint: Define short as less than 190 mm, average as between 190 and 210 mm, and long as greater than 210 mm.
 
     ```{r}
     penguins |> 
@@ -259,11 +260,11 @@ penguins |>
             max_body_mass = max(body_mass_g, na.rm = TRUE))
 ```
 
-Similar to what we've seen in other functions, you can create multiple summaries in a single step by separating them with commas.
+Similar to what we've seen in other functions, we can create multiple summaries in a single step by separating them with commas.
 
 ## 7️⃣Group by one or more variables: group_by()
 
-In data analysis, a common task is to split your data into groups, apply a function to each group, and then combine the results. This approach is known as the split-apply-combine paradigm. The [`group_by()`](https://dplyr.tidyverse.org/reference/group_by.html) function helps us achieve this by allowing us to specify how we want to split our data into groups.
+In data analysis, a common task is to split our data into groups, apply a function to each group, and then combine the results. This approach is known as the split-apply-combine paradigm. The [`group_by()`](https://dplyr.tidyverse.org/reference/group_by.html) function helps us achieve this by allowing us to specify how we want to split our data into groups.
 
 💻Calculate mean body mass for each species:
 
@@ -299,7 +300,7 @@ penguins |>
             sd_body_mass = sd(body_mass_g, na.rm = TRUE))
 ```
 
-By default, when you apply a grouping with multiple factors, dplyr will keep the last level of grouping after the summary. Here, the output is still grouped by `species`. To remove grouping from a data frame, use the `ungroup()` function or the `.groups  = "drop"` argument in the `summarise()` function. Both methods will allow you to continue working with the data as a regular data frame.
+By default, when we apply a grouping with multiple factors, dplyr will keep the last level of grouping after the summary. Here, the output is still grouped by `species`. To remove grouping from a data frame, use the `ungroup()` function or the `.groups  = "drop"` argument in the `summarise()` function. Both methods will allow us to continue working with the data as a regular data frame.
 
 ```{r}
 # option 1
@@ -319,7 +320,7 @@ df <- penguins |>
 
 ## 8️⃣Sort rows and extract specific values: arrange(), slice(), pull()
 
-Sometimes, you're interested in extracting a particular value from a data frame, like finding the largest or smallest value in a column.
+Sometimes, we're interested in extracting a particular value from a data frame, like finding the largest or smallest value in a column.
 
 1.  💻Use the [`arrange()`](https://dplyr.tidyverse.org/reference/arrange.html) function to reorder our data by `mean_body_mass` in descending order
 
@@ -360,7 +361,7 @@ penguins |>
 
 The [tidyr](https://tidyr.tidyverse.org/) package is another key component of the tidyverse. It focuses on reshaping data to ensure it's in the right format for analysis.
 
-Sometimes we need data in a "long" format (more rows, fewer columns) for certain analyses, or in a "wide" format (more columns, fewer rows) for others. For example, a wide data set might have separate columns for different measurements (e.g., bill length, flipper length), but for some analyses or visualizations, you might need to convert this into a long format where all measurements are in a single column, with another column specifying the measurement type.
+Sometimes we need data in a "long" format (more rows, fewer columns) for certain analyses, or in a "wide" format (more columns, fewer rows) for others. For example, a wide data set might have separate columns for different measurements (e.g., bill length, flipper length), but for some analyses or visualizations, we might need to convert this into a long format where all measurements are in a single column, with another column specifying the measurement type.
 
 Imagine our observation of interest is the measurement itself, rather than the penguin...
 
@@ -368,6 +369,7 @@ Imagine our observation of interest is the measurement itself, rather than the p
 
 ```{r}
 penguins_long <- penguins |> 
+  mutate(id = row_number()) |> 
   pivot_longer(
     cols = ends_with("_mm") | ends_with("_g"),
     names_to = "measurement_type",
@@ -380,22 +382,28 @@ What if we want to go back to the original wide format?
 💻Use the [`pivot_wider()`](https://tidyr.tidyverse.org/reference/pivot_wider.html) function to reverse the process:
 
 ```{r}
-
+penguins_wide <- penguins_long |> 
+  pivot_wider(
+    names_from = measurement_type,
+    values_from = value
+)
 ```
 
 ## 📚Resources
 
-| Function              | Description |
-|-----------------------|-------------|
-| dplyr::glimpse()      |             |
-| dplyr::select()       |             |
-| dplyr::filter()       |             |
-| dplyr::mutate()       |             |
-| dplyr::summarise()    |             |
-| dplyr::group_by()     |             |
-| dplyr::count()        |             |
-| dplyr::arrange()      |             |
-| dplyr::pull()         |             |
-| dplyr::slice()        |             |
-| tidyr::pivot_longer() |             |
-| tidyr::pivot_wider()  |             |
+| Function                | Description                                      |
+|-----------------------|-------------------------------------------------|
+| `dplyr::glimpse()`      | Get a glimpse of your data                       |
+| `dplyr::select()`       | Keep or drop columns using their names and types |
+| `dplyr::filter()`       | Keep rows that match a condition                 |
+| `dplyr::mutate()`       | Create, modify, and delete columns               |
+| `dplyr::summarise()`    | Summarise each group down to one row             |
+| `dplyr::group_by()`     | Group by one or more variables                   |
+| `dplyr::count()`        | Count the observations in each group             |
+| `dplyr::arrange()`      | Order rows using column values                   |
+| `dplyr::slice()`        | Subset rows using their positions                |
+| `dplyr::pull()`         | Extract a single column                          |
+| `tidyr::pivot_longer()` | Pivot data from wide to long                     |
+| `tidyr::pivot_wider()`  | Pivot data from long to wide                     |
+
+-   [Data transformation with dplyr cheatsheet](https://rstudio.github.io/cheatsheets/html/data-transformation.html?_gl=1*1foigmt*_ga*Mjg1MTU3NDY3LjE3MDU2OTExOTY.*_ga_2C0WZ1JHG0*MTcyNDA3ODA5Ni4yMy4xLjE3MjQwNzgxNDkuMC4wLjA.)
