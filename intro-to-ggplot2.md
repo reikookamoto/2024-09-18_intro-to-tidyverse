@@ -1,14 +1,14 @@
 # Introduction to ggplot2
 Reiko Okamoto
-2024-08-19
+2024-08-20
 
 ## 🎨Introduction to ggplot2
 
-ggplot2 helps you create a wide range of static, informative, and
+ggplot2 helps us create a wide range of static, informative, and
 visually appealing graphics. Its name comes from the Grammar of
 Graphics, which is a framework for building plots in a structured way.
-You build a plot incrementally by adding layers like data points, axes,
-colours, and labels.
+We can build a plot incrementally by adding layers like data points,
+axes, colours, and labels.
 
 💻Load the necessary packages:
 
@@ -224,4 +224,127 @@ trains_df |>
 
 Create a scatter plot to visualize the relationship between two other
 continuous variables in the data. This time, change the default size of
-the points by using the `size` argument.
+the points by using the `size` argument. The default size is 1.5, but we
+can increase or decrease this value to make the points bigger or
+smaller.
+
+``` r
+trains_df |> 
+  ggplot(aes(x = total_num_trips, y = num_late_at_departure)) +
+  geom_point(size = 0.1)
+```
+
+![](intro-to-ggplot2_files/figure-commonmark/unnamed-chunk-8-1.png)
+
+## 4️⃣Bar plots
+
+Bar plots are also commonly used in data analysis. They are particular
+useful for comparing values between different groups.
+
+💻Create a bar plot to show the number of departures from “PARIS NORD”
+in 2015 by arrival station:
+
+``` r
+trains_df |> 
+  filter(departure_station == "PARIS NORD",
+         year == 2015) |> 
+  group_by(arrival_station) |> 
+  summarise(n = sum(total_num_trips)) |> 
+  ggplot(aes(x = arrival_station, y = n)) +
+  geom_bar(stat = "identity")
+```
+
+![](intro-to-ggplot2_files/figure-commonmark/unnamed-chunk-9-1.png)
+
+Here, `stat = "identity"` tells ggplot2 to take the `n` column as it is
+and use it for the height of the bars.
+
+💻Create a grouped bar plot to compare the number of departures from
+“PARIS NORD” in 2015 and 2015, by arrival station:
+
+``` r
+bar_plot <- trains_df |> 
+  filter(departure_station == "PARIS NORD", 
+         year %in% c(2015, 2016)) |>
+  mutate(year = as.factor(year)) |> 
+  group_by(year, arrival_station) |> 
+  summarise(n = sum(total_num_trips), .groups = "drop") |> 
+  ggplot(aes(x = arrival_station, y = n, fill = year)) +
+  geom_bar(stat = "identity", position = "dodge")
+```
+
+- `as.factor(year)` changes the `year` variable from a numeric type to a
+  categorical one, ensuring each year gets a distinct colour
+
+- `fill` argument in `aes()` maps the `year` variable to the fill colour
+  of the bars
+
+- `position = "dodge"` arranges the bars of the different years side by
+  side within each `arrival_station` category, making it easier to
+  compare values across years
+
+💻Customize fill colours manually:
+
+``` r
+bar_plot +
+  scale_fill_manual(values = c("2015" = "gold", "2016" = "royalblue"))
+```
+
+![](intro-to-ggplot2_files/figure-commonmark/unnamed-chunk-11-1.png)
+
+Pre-made colour palettes, such as those from the
+[RColorBrewer](https://r-graph-gallery.com/38-rcolorbrewers-palettes.html)
+package, offer a variety of well-tested colour schemes that are often
+aesthetically pleasing. These palettes are useful for ensuring good
+contrast and consistency across visualizations.
+
+💻Display available palettes:
+
+``` r
+display.brewer.all()
+```
+
+![](intro-to-ggplot2_files/figure-commonmark/unnamed-chunk-12-1.png)
+
+💻Pick and apply a qualitative palette from RColorBrewer:
+
+``` r
+bar_plot +
+  scale_fill_brewer(palette = "Accent")
+```
+
+![](intro-to-ggplot2_files/figure-commonmark/unnamed-chunk-13-1.png)
+
+In ggplot2, the `scale_{aesthetic}_{type}()` functions control how data
+values are mapped to aesthetic properties like colour and fill.
+
+The `scale_fill_{type}()` functions adjust fill colours in plots where
+the `fill` aesthetic is mapped to a variable, such as in bar and box
+plots.
+
+On the other hand, `scale_colour_{type}()` functions are used to adjust
+the colours of lines, points, or borders in plots where the `colour`
+aesthetic is mapped to a variable.
+
+#### 📝Exercise 2
+
+Create a bar plot to show the number of departures from “NANTES” in 2018
+by arrival station. Use the `scale_fill_brewer()` function to apply a
+qualitative palette accessible to colorblind viewers. Hint: You can call
+`display.brewer.allcolorblindFriendly=TRUE)` to retrieve a list of
+appropriate palettes.
+
+``` r
+trains_df |> 
+  filter(departure_station == "NANTES",
+         year == 2018) |> 
+  group_by(arrival_station) |> 
+  summarise(n = sum(total_num_trips)) |> 
+  ggplot(aes(x = arrival_station, y = n, fill = arrival_station)) +
+  geom_bar(stat = "identity") +
+  scale_fill_brewer(palette = "Paired")
+```
+
+![](intro-to-ggplot2_files/figure-commonmark/unnamed-chunk-14-1.png)
+
+## 5️⃣Line plots

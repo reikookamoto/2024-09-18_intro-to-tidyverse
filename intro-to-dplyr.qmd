@@ -392,7 +392,7 @@ penguins_wide <- penguins_long |>
 ## 📚Resources
 
 | Function                | Description                                      |
-|-----------------------|-------------------------------------------------|
+|-------------------------|--------------------------------------------------|
 | `dplyr::glimpse()`      | Get a glimpse of your data                       |
 | `dplyr::select()`       | Keep or drop columns using their names and types |
 | `dplyr::filter()`       | Keep rows that match a condition                 |
