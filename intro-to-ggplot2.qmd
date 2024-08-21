@@ -37,7 +37,7 @@ trains_df
 🧠Explore the type and description of each variable:
 
 | Variable                  | Type      | Description                          |
-|-----------------------|----------------|---------------------------------|
+|---------------------------|-----------|--------------------------------------|
 | `year`                    | double    | Year of observation                  |
 | `month`                   | double    | Month of obsrevation                 |
 | `service`                 | character | Type of service                      |
