@@ -30,7 +30,8 @@ hopefully interested in, using the tidyverse for data analysis.
 
 ## 🐧Meet the Palmer penguins
 
-<img src="imgs/penguins.png" data-fig-align="center" width="500" />
+<img src="../imgs/penguins.png" data-fig-align="center"
+alt="Artwork by @allison_horst" />
 
 We’ll use the `penguins` data set from the
 [palmerpenguins](https://allisonhorst.github.io/palmerpenguins/)
@@ -73,7 +74,8 @@ every time we start a new session.
 
     starting httpd help server ... done
 
-<img src="imgs/culmen_depth.png" data-fig-align="center" width="500" />
+<img src="../imgs/culmen_depth.png" data-fig-align="center" width="500"
+alt="Artwork by @allison_horst" />
 
 ## 1️⃣Get a glimpse of our data: glimpse()
 

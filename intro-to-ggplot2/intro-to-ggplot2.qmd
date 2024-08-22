@@ -23,7 +23,7 @@ library(RColorBrewer)
 
 ## 1️⃣Explore the sample data
 
-![](imgs/antoine-schibler-H84rHbx7IP0-unsplash.jpg){fig-align="center" width="500"}
+![](../imgs/antoine-schibler-H84rHbx7IP0-unsplash.jpg){fig-align="center" width="500"}
 
 We'll use a data set sourced from a [GitHub repository](https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-02-26), which originally retrieved the data from the SNCF open data portal. SCNF, founded in 1938, is France's national railway company. It operates systems like the TGV high-speed trains and regional TER services.
 
@@ -37,7 +37,7 @@ trains_df
 🧠Explore the type and description of each variable:
 
 | Variable                  | Type      | Description                          |
-|-----------------------|------------------|--------------------------------|
+|-----------------------|------------------|-------------------------------|
 | `year`                    | double    | Year of observation                  |
 | `month`                   | double    | Month of obsrevation                 |
 | `service`                 | character | Type of service                      |
@@ -251,7 +251,7 @@ The `colour` argument in `aes()` maps the `arrival_station` variable to the line
 
 Fun fact: Rennes has the most frequent service because trains departing from Paris often separate in Rennes, with the first part going to Brest and the latter to Quimper (see map below).
 
-![](imgs/brittany_map.png){fig-align="center" width="400"}
+![](../imgs/brittany_map.png){fig-align="center" width="400"}
 
 💻Enhance the existing line plot by by making the x-axis labels more detailed:
 

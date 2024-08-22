@@ -26,7 +26,7 @@ There's no expectation for you to memorize everything. Even experienced programm
 
 ## 🐧Meet the Palmer penguins
 
-![](imgs/penguins.png){fig-align="center" width="500"}
+![Artwork by \@allison_horst](../imgs/penguins.png){fig-align="center"}
 
 We'll use the `penguins` data set from the [palmerpenguins](https://allisonhorst.github.io/palmerpenguins/) package. It contains measurements for adult penguins observed in the islands in the Palmer Archipelago off the Antarctic Peninsula. The data were collected and made available by Dr. Kristen Gorman and the Palmer Station Long Term Ecological Research (LTER) Program. This data set is great for learning because it's small enough to be manageable for beginners but contains a range of different types of data and features.
 
@@ -45,7 +45,7 @@ We only need to install a package once, but we'll need to reload it every time w
 ?penguins
 ```
 
-![](imgs/culmen_depth.png){fig-align="center" width="500"}
+![Artwork by \@allison_horst](../imgs/culmen_depth.png){fig-align="center" width="500"}
 
 ## 1️⃣Get a glimpse of our data: glimpse()
 
@@ -392,7 +392,7 @@ penguins_wide <- penguins_long |>
 ## 📚Resources
 
 | Function                | Description                                      |
-|-------------------------|--------------------------------------------------|
+|------------------------|-----------------------------------------------|
 | `dplyr::glimpse()`      | Get a glimpse of your data                       |
 | `dplyr::select()`       | Keep or drop columns using their names and types |
 | `dplyr::filter()`       | Keep rows that match a condition                 |

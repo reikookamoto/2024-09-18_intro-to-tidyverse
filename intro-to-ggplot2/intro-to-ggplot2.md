@@ -33,7 +33,7 @@ library(RColorBrewer)
 
 ## 1️⃣Explore the sample data
 
-<img src="imgs/antoine-schibler-H84rHbx7IP0-unsplash.jpg"
+<img src="../imgs/antoine-schibler-H84rHbx7IP0-unsplash.jpg"
 data-fig-align="center" width="500" />
 
 We’ll use a data set sourced from a [GitHub
@@ -404,7 +404,8 @@ Fun fact: Rennes has the most frequent service because trains departing
 from Paris often separate in Rennes, with the first part going to Brest
 and the latter to Quimper (see map below).
 
-<img src="imgs/brittany_map.png" data-fig-align="center" width="400" />
+<img src="../imgs/brittany_map.png" data-fig-align="center"
+width="400" />
 
 💻Enhance the existing line plot by by making the x-axis labels more
 detailed:
