@@ -1,6 +1,6 @@
 # Introduction to ggplot2
 Reiko Okamoto
-2024-08-21
+2024-08-22
 
 ## 🎨Introduction to ggplot2
 
@@ -47,7 +47,7 @@ systems like the TGV high-speed trains and regional TER services.
 function from the [readr](https://readr.tidyverse.org/) package:
 
 ``` r
-trains_df <- read_csv("french_trains.csv")
+trains_df <- read_csv(here::here("french_trains.csv"))
 ```
 
     Rows: 5462 Columns: 11
@@ -215,7 +215,7 @@ trains_df |>
   geom_point(alpha = 0.2, colour = "#3182bd") +
   labs(
     title = "French train punctuality",
-    x = "Average journey time (in minutes)",
+    x = "Average journey time (minutes)",
     y = "Number of trains that departed late"
   )
 ```
@@ -265,7 +265,7 @@ and use it for the height of the bars.
 “PARIS NORD” in 2015 and 2016, by arrival station:
 
 ``` r
-paris_1516_plot <- trains_df |> 
+paris_1516_plt <- trains_df |> 
   filter(departure_station == "PARIS NORD", 
          year %in% c(2015, 2016)) |>
   mutate(year = as.factor(year)) |> 
@@ -290,7 +290,7 @@ Breaking down the code:
 💻Customize fill colours manually:
 
 ``` r
-paris_1516_plot +
+paris_1516_plt +
   scale_fill_manual(values = c("2015" = "gold", "2016" = "royalblue"))
 ```
 
@@ -313,7 +313,7 @@ display.brewer.all()
 💻Pick and apply a qualitative palette from RColorBrewer:
 
 ``` r
-paris_1516_plot +
+paris_1516_plt +
   scale_fill_brewer(palette = "Accent")
 ```
 
@@ -390,7 +390,7 @@ MONTPARNASSE” to multiple cities in Brittany (i.e., “RENNES”, “BREST”,
 ``` r
 cities <- c("RENNES", "BREST", "QUIMPER")
 
-brittany_plot <- trains_df |> 
+brittany_plt <- trains_df |> 
   filter(departure_station == "PARIS MONTPARNASSE",
          arrival_station %in% cities) |> 
   ggplot(aes(x = date, y = total_num_trips, colour = arrival_station)) +
@@ -410,7 +410,7 @@ and the latter to Quimper (see map below).
 detailed:
 
 ``` r
-brittany_plot <- brittany_plot +
+brittany_plt <- brittany_plt +
   scale_x_date(date_labels = "%b %Y", date_breaks = "4 months")
 ```
 
@@ -428,7 +428,7 @@ transformation) to better represent the data.
 its overall look and feel:
 
 ``` r
-brittany_plot +
+brittany_plt +
   theme_minimal()
 ```
 
@@ -441,7 +441,7 @@ can use to match the style we’re aiming for.
 ## 6️⃣Saving our plots
 
 ``` r
-ggsave(filename = "brittany.png", plot = brittany_plot)
+ggsave(filename = "brittany.png", plot = brittany_plt)
 ```
 
     Saving 7 x 5 in image

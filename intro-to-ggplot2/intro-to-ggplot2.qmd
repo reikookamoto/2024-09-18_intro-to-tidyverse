@@ -30,14 +30,14 @@ We'll use a data set sourced from a [GitHub repository](https://github.com/rford
 💻Read in the data using the [`read_csv()`](https://readr.tidyverse.org/reference/read_delim.html) function from the [readr](https://readr.tidyverse.org/) package:
 
 ```{r}
-trains_df <- read_csv("french_trains.csv")
+trains_df <- read_csv(here::here("french_trains.csv"))
 trains_df
 ```
 
 🧠Explore the type and description of each variable:
 
 | Variable                  | Type      | Description                          |
-|---------------------------|-----------|--------------------------------------|
+|-----------------------|------------------|--------------------------------|
 | `year`                    | double    | Year of observation                  |
 | `month`                   | double    | Month of obsrevation                 |
 | `service`                 | character | Type of service                      |
@@ -114,7 +114,7 @@ trains_df |>
   geom_point(alpha = 0.2, colour = "#3182bd") +
   labs(
     title = "French train punctuality",
-    x = "Average journey time (in minutes)",
+    x = "Average journey time (minutes)",
     y = "Number of trains that departed late"
   )
 ```
@@ -150,7 +150,7 @@ Here, `stat = "identity"` tells ggplot2 to take the `n` column as it is and use 
 💻Create a grouped bar plot to compare the number of departures from "PARIS NORD" in 2015 and 2016, by arrival station:
 
 ```{r}
-paris_1516_plot <- trains_df |> 
+paris_1516_plt <- trains_df |> 
   filter(departure_station == "PARIS NORD", 
          year %in% c(2015, 2016)) |>
   mutate(year = as.factor(year)) |> 
@@ -171,7 +171,7 @@ Breaking down the code:
 💻Customize fill colours manually:
 
 ```{r}
-paris_1516_plot +
+paris_1516_plt +
   scale_fill_manual(values = c("2015" = "gold", "2016" = "royalblue"))
 ```
 
@@ -186,7 +186,7 @@ display.brewer.all()
 💻Pick and apply a qualitative palette from RColorBrewer:
 
 ```{r}
-paris_1516_plot +
+paris_1516_plt +
   scale_fill_brewer(palette = "Accent")
 ```
 
@@ -240,7 +240,7 @@ Instead of working with separate `year` and `month` columns, we create a single 
 ```{r}
 cities <- c("RENNES", "BREST", "QUIMPER")
 
-brittany_plot <- trains_df |> 
+brittany_plt <- trains_df |> 
   filter(departure_station == "PARIS MONTPARNASSE",
          arrival_station %in% cities) |> 
   ggplot(aes(x = date, y = total_num_trips, colour = arrival_station)) +
@@ -256,7 +256,7 @@ Fun fact: Rennes has the most frequent service because trains departing from Par
 💻Enhance the existing line plot by by making the x-axis labels more detailed:
 
 ```{r}
-brittany_plot <- brittany_plot +
+brittany_plt <- brittany_plt +
   scale_x_date(date_labels = "%b %Y", date_breaks = "4 months")
 ```
 
@@ -267,7 +267,7 @@ The `scale_x_{type}()` and `scale_y_{type}` functions allow us to customize how 
 💻Further enhance the line plot by applying a different theme to change its overall look and feel:
 
 ```{r}
-brittany_plot +
+brittany_plt +
   theme_minimal()
 ```
 
@@ -276,7 +276,7 @@ ggplot2 offers [various themes](https://ggplot2.tidyverse.org/reference/ggtheme.
 ## 6️⃣Saving our plots
 
 ```{r}
-ggsave(filename = "brittany.png", plot = brittany_plot)
+ggsave(filename = "brittany.png", plot = brittany_plt)
 ```
 
 If we don't specify the `plot` argument, the function will save the last plot displayed by default.
