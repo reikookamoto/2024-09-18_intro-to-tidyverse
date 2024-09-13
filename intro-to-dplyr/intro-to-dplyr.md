@@ -1,6 +1,6 @@
 # Introduction to dplyr
 Reiko Okamoto
-2024-08-22
+2024-09-13
 
 ## 👋Welcome to the tidyverse
 
@@ -439,6 +439,12 @@ inside-out, making it less intuitive
 
 💻Use the pipe to do the same thing in a more streamlined way:
 
+Keyboard shortcuts for the pipe:
+
+- Windows: Ctrl + Shift + M
+
+- Mac: Cmd + Shift + M
+
 ``` r
 penguins |> 
   filter(species == "Adelie") |> 
@@ -463,12 +469,6 @@ penguins |>
 The pipe allows us to pass the output of one function directly to the
 next. This approach makes our code easier to read because the operations
 flow left to right, top to bottom.
-
-Keyboard shortcuts for the pipe:
-
-- Windows: Ctrl + Shift + M
-
-- Mac: Cmd + Shift + M
 
 #### 📝Exercise 2
 

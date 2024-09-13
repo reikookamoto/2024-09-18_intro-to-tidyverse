@@ -33,8 +33,7 @@ We'll use the `penguins` data set from the [palmerpenguins](https://allisonhorst
 💻Load the necessary packages:
 
 ```{r}
-library(tidyverse)
-library(palmerpenguins)
+# YOUR CODE HERE
 ```
 
 We only need to install a package once, but we'll need to reload it every time we start a new session.
@@ -42,7 +41,7 @@ We only need to install a package once, but we'll need to reload it every time w
 💻Open the data set documentation:
 
 ```{r}
-?penguins
+# YOUR CODE HERE
 ```
 
 ![Artwork by \@allison_horst](../imgs/culmen_depth.png){fig-align="center" width="500"}
@@ -52,7 +51,7 @@ We only need to install a package once, but we'll need to reload it every time w
 💻Inspect the data using the [`glimpse()`](https://dplyr.tidyverse.org/reference/glimpse.html) function.
 
 ```{r}
-glimpse(penguins)
+# YOUR CODE HERE
 ```
 
 -   *How many rows?*
@@ -70,26 +69,25 @@ Sometimes, we only need to work with a few specific columns instead of the entir
 💻Select one column by name:
 
 ```{r}
-select(penguins, species)
+# YOUR CODE HERE
 ```
 
 💻Select two columns by name:
 
 ```{r}
-select(penguins, species, island)
-select(penguins, c(species, island))
+# YOUR CODE HERE
 ```
 
 💻Select all columns except certain ones:
 
 ```{r}
-select(penguins, -species, -island)
+# YOUR CODE HERE
 ```
 
 💻Select columns that start with "bill":
 
 ```{r}
-select(penguins, starts_with("bill"))
+# YOUR CODE HERE
 ```
 
 Similar functions like `ends_with()` and `contains()` are also available to select columns based on the ending or presence of specific characters.
@@ -97,7 +95,7 @@ Similar functions like `ends_with()` and `contains()` are also available to sele
 💻Select numeric variables:
 
 ```{r}
-select(penguins, where(is.numeric))
+# YOUR CODE HERE
 ```
 
 ## 3️⃣Keep rows that match a condition: filter()
@@ -107,13 +105,13 @@ Filtering data is a common task in data analysis. Use the [`filter()`](https://d
 💻Show only the penguins of the Gentoo species:
 
 ```{r}
-filter(penguins, species == "Gentoo")
+# YOUR CODE HERE
 ```
 
 💻Find all Adelie penguins that are also on Torgersen Island:
 
 ```{r}
-filter(penguins, species == "Adelie", island == "Torgersen")
+# YOUR CODE HERE
 ```
 
 The comma acts as an AND operator, meaning both conditions must be true for a row to be included.
@@ -121,8 +119,7 @@ The comma acts as an AND operator, meaning both conditions must be true for a ro
 💻Find all penguins that either Adelie or Gentoo:
 
 ```{r}
-filter(penguins, species == "Adelie" | species == "Gentoo")
-filter(penguins, species != "Chinstrap")
+# YOUR CODE HERE
 ```
 
 The vertical bar acts as an OR operator, meaning a row is returned if any of the conditions are true.
@@ -135,20 +132,16 @@ The vertical bar acts as an OR operator, meaning a row is returned if any of the
 
 3.  Filter the data to find all penguins that are either on Biscoe Island or Torgersen Island.
 
-    ```{r}
-    select(penguins, sex, year)
-
-    filter(penguins, flipper_length_mm > 200)
-
-    filter(penguins, island == "Biscoe" | island == "Torgersen")
-    ```
+```{r}
+# YOUR CODE HERE
+```
 
 ## 4️⃣Pipes
 
 💻Filter the data to only include Adelie penguins, and then keep only the columns that start with "bill":
 
 ```{r}
-select(filter(penguins, species == "Adelie"), starts_with("bill"))
+# YOUR CODE HERE
 ```
 
 This works, but it can get difficult to read, especially as our code grows more complex. The nested functions force us to read the code inside-out, making it less intuitive
@@ -162,9 +155,7 @@ Keyboard shortcuts for the pipe:
 -   Mac: Cmd + Shift + M
 
 ```{r}
-penguins |> 
-  filter(species == "Adelie") |> 
-  select(starts_with("bill"))
+# YOUR CODE HERE
 ```
 
 The pipe allows us to pass the output of one function directly to the next. This approach makes our code easier to read because the operations flow left to right, top to bottom.
@@ -174,9 +165,7 @@ The pipe allows us to pass the output of one function directly to the next. This
 Using the pipe, filter the data to include only female penguins with `bill_length_mm` less than or equal to 40, and then select the `species` and `bill_length_mm` columns.
 
 ```{r}
-penguins |> 
-  filter(sex == "female", bill_length_mm <= 40) |> 
-  select(species, bill_length_mm)
+# YOUR CODE HERE
 ```
 
 ## 5️⃣Create and modify columns: mutate()
@@ -186,8 +175,7 @@ In data analysis, it's common to derive new variables from existing ones. The [`
 💻Create a new column called `body_mass_kg` (i.e., the `body_mass_g` column converted from grams to kilograms):
 
 ```{r}
-penguins |> 
-  mutate(body_mass_kg = body_mass_g / 1000)
+# YOUR CODE HERE
 ```
 
 By separating the new columns with a comma, we can create multiple new variables in one function call.
@@ -195,20 +183,13 @@ By separating the new columns with a comma, we can create multiple new variables
 💻Use [`if_else()`](https://dplyr.tidyverse.org/reference/if_else.html) to create a column called `large_penguin`, which indicates whether the penguin's body mass is greater than 4,000 grams:
 
 ```{r}
-penguins |> 
-  mutate(large_penguin = if_else(body_mass_g > 4000, TRUE, FALSE))
+# YOUR CODE HERE
 ```
 
 💻Use [`case_when()`](https://dplyr.tidyverse.org/reference/case_when.html) to categorize the penguins based on their body mass:
 
 ```{r}
-penguins |> 
-  mutate(size_category = case_when(
-    body_mass_g < 3000 ~ "small",
-    body_mass_g < 4000 ~ "medium",
-    body_mass_g >= 4000 ~ "large",
-    .default = "unknown"
-  ))
+# YOUR CODE HERE
 ```
 
 `if_else()` is best for binary conditions where we need to choose between two outcomes. In contrast, `case_when()` is ideal for handling multiple conditions, allowing us to return different values based on various criteria.
@@ -216,8 +197,7 @@ penguins |>
 💻Use [`across()`](https://dplyr.tidyverse.org/reference/across.html) to efficiently round values in multiple columns simultaneously:
 
 ```{r}
-penguins |> 
-  mutate(across(.cols = c(bill_length_mm, bill_depth_mm), .fns = round))
+# YOUR CODE HERE
 ```
 
 #### 📝Exercise 3
@@ -226,18 +206,9 @@ penguins |>
 
 2.  Create a new column called `flipper_size` that categorizes penguins as short, average, or long based on their `flipper_length_mm`. Hint: Define short as less than 190 mm, average as between 190 and 210 mm, and long as greater than 210 mm.
 
-    ```{r}
-    penguins |> 
-      mutate(bill_depth_cm = bill_depth_mm / 0.1)
-
-    penguins |> 
-      mutate(flipper_size = case_when(
-        flipper_length_mm < 190 ~ "short",
-        190 <= flipper_length_mm & flipper_length_mm <= 210 ~ "average",
-        flipper_length_mm > 210 ~ "long",
-        .default = "unknown"
-      ))
-    ```
+```{r}
+# YOUR CODE HERE
+```
 
 ## 6️⃣Compute summary statistics: summarise()
 
@@ -246,8 +217,7 @@ We often need to summarize our data to understand key characteristics (e.g., mea
 💻Calculate the mean body mass for all the penguins in the data.
 
 ```{r}
-penguins |> 
-  summarise(mean_body_mass = mean(body_mass_g, na.rm = TRUE))
+# YOUR CODE HERE
 ```
 
 The function creates a new data frame with a single row containing the summary statistic.
@@ -255,9 +225,7 @@ The function creates a new data frame with a single row containing the summary s
 💻Calculate the minimum and maximum of body mass at the same time:
 
 ```{r}
-penguins |> 
-  summarise(min_body_mass = min(body_mass_g, na.rm = TRUE),
-            max_body_mass = max(body_mass_g, na.rm = TRUE))
+# YOUR CODE HERE
 ```
 
 Similar to what we've seen in other functions, we can create multiple summaries in a single step by separating them with commas.
@@ -269,9 +237,7 @@ In data analysis, a common task is to split our data into groups, apply a functi
 💻Calculate mean body mass for each species:
 
 ```{r}
-penguins |> 
-  group_by(species) |> 
-  summarise(mean_body_mass = mean(body_mass_g, na.rm = TRUE))
+# YOUR CODE HERE
 ```
 
 A grouped data frame has all the properties of a regular data frame but has an additional property that describes the grouping structure. R will treat each group as it were a separate data frame, so operations like `summarise()` are applied to each group separately, and then brought back together.
@@ -279,43 +245,25 @@ A grouped data frame has all the properties of a regular data frame but has an a
 💻Count the number of penguins on each island:
 
 ```{r}
-penguins |> 
-  group_by(island) |> 
-  tally()
+# YOUR CODE HERE
 ```
 
 💻Achieve this count using the [`count()`](https://dplyr.tidyverse.org/reference/count.html) function, which combines `group_by()` and `tally()` in one step:
 
 ```{r}
-penguins |> 
-  count(island)
+# YOUR CODE HERE
 ```
 
 💻Calculate the mean and standard deviation of body mass for each combination of species and sex:
 
 ```{r}
-penguins |> 
-  group_by(species, sex) |> 
-  summarise(mean_body_mass = mean(body_mass_g, na.rm = TRUE),
-            sd_body_mass = sd(body_mass_g, na.rm = TRUE))
+# YOUR CODE HERE
 ```
 
 By default, when we apply a grouping with multiple factors, dplyr will keep the last level of grouping after the summary. Here, the output is still grouped by `species`. To remove grouping from a data frame, use the `ungroup()` function or the `.groups  = "drop"` argument in the `summarise()` function. Both methods will allow us to continue working with the data as a regular data frame.
 
 ```{r}
-# option 1
-penguins |> 
-  group_by(species, sex) |> 
-  summarise(mean_body_mass = mean(body_mass_g, na.rm = TRUE),
-            sd_body_mass = sd(body_mass_g, na.rm = TRUE)) |> 
-  ungroup()
-
-# option 2
-df <- penguins |> 
-  group_by(species, sex) |> 
-  summarise(mean_body_mass = mean(body_mass_g, na.rm = TRUE),
-            sd_body_mass = sd(body_mass_g, na.rm = TRUE),
-            .groups = "drop")
+# YOUR CODE HERE
 ```
 
 ## 8️⃣Sort rows and extract specific values: arrange(), slice(), pull()
@@ -329,10 +277,7 @@ Sometimes, we're interested in extracting a particular value from a data frame, 
 3.  💻Use [`pull()`](https://dplyr.tidyverse.org/reference/pull.html) to extract the mean body mass value from the data as a single numeric vector
 
 ```{r}
-df |> 
-  arrange(desc(mean_body_mass)) |> 
-  slice(1) |> 
-  pull(mean_body_mass)
+# YOUR CODE HERE
 ```
 
 #### 📝Exercise 4
@@ -348,13 +293,7 @@ Use the dplyr verbs we have learned so far to analyze penguin flipper length:
 Hint: Remember to handle missing values using `na.rm = TRUE` when calculating the summary statistics.
 
 ```{r}
-penguins |> 
-  select(island, species, flipper_length_mm) |> 
-  group_by(island, species) |> 
-  summarise(mean_flipper_len = mean(flipper_length_mm, na.rm = TRUE),
-            max_flipped_len = max(flipper_length_mm, na.rm = TRUE),
-            .groups = "drop") |> 
-  arrange(mean_flipper_len)
+# YOUR CODE HERE
 ```
 
 ## 🌟Bonus: lengthen and widen data: pivot_longer(), pivot_wider()
@@ -392,7 +331,7 @@ penguins_wide <- penguins_long |>
 ## 📚Resources
 
 | Function                | Description                                      |
-|-------------------------|-----------------------------------------------|
+|-------------------------|--------------------------------------------------|
 | `dplyr::glimpse()`      | Get a glimpse of your data                       |
 | `dplyr::select()`       | Keep or drop columns using their names and types |
 | `dplyr::filter()`       | Keep rows that match a condition                 |

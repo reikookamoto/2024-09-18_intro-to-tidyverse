@@ -1,6 +1,6 @@
 # Introduction to ggplot2
 Reiko Okamoto
-2024-08-22
+2024-09-13
 
 ## 🎨Introduction to ggplot2
 
@@ -86,7 +86,7 @@ trains_df
 | Variable                  | Type      | Description                          |
 |---------------------------|-----------|--------------------------------------|
 | `year`                    | double    | Year of observation                  |
-| `month`                   | double    | Month of obsrevation                 |
+| `month`                   | double    | Month of observation                 |
 | `service`                 | character | Type of service                      |
 | `departure_station`       | character | Departure station                    |
 | `arrival_station`         | character | Arrival station                      |
@@ -97,11 +97,11 @@ trains_df
 | `num_late_at_departure`   | double    | Number of trains that departed late  |
 | `num_arriving_late`       | double    | Number of trains that arrived late   |
 
-The data set contains **monthly summaries** train journeys from 2015 to
-2018. Each row represents aggregated data for a specific route and
+The data set contains **monthly summaries** of train journeys from 2015
+to 2018. Each row represents aggregated data for a specific route and
 month, including average journey times, delays, and the total number of
 trips. This structure will allow us to explore trends over time and
-visualize overall patterns in travel travel.
+visualize overall patterns in train travel.
 
 💻Inspect the first and last parts of the data set:
 
@@ -360,8 +360,7 @@ Line plots are useful in data analysis for visualizing trends over time.
 
 ``` r
 trains_df <- trains_df |> 
-  mutate(date = paste(year, month, "1", sep = "-"),
-         date = ymd(date))
+  mutate(date = make_date(year, month, "1"))
 ```
 
 💻Create a line plot to show how the monthly number of trips from “PARIS

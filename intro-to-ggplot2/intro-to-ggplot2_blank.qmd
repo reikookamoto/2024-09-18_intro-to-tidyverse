@@ -17,8 +17,7 @@ ggplot2 helps us create a wide range of static, informative, and visually appeal
 💻Load the necessary packages:
 
 ```{r}
-library(tidyverse)
-library(RColorBrewer)
+# YOUR CODE HERE
 ```
 
 ## 1️⃣Explore the sample data
@@ -30,8 +29,7 @@ We'll use a data set sourced from a [GitHub repository](https://github.com/rford
 💻Read in the data using the [`read_csv()`](https://readr.tidyverse.org/reference/read_delim.html) function from the [readr](https://readr.tidyverse.org/) package:
 
 ```{r}
-trains_df <- read_csv(here::here("french_trains.csv"))
-trains_df
+# YOUR CODE HERE
 ```
 
 🧠Explore the type and description of each variable:
@@ -55,8 +53,7 @@ The data set contains **monthly summaries** of train journeys from 2015 to 2018.
 💻Inspect the first and last parts of the data set:
 
 ```{r}
-head(trains_df)
-tail(trains_df)
+# YOUR CODE HERE
 ```
 
 -   The first row captures information on trips from "AIX EN PROVENCE TGV" to "PARIS LYON" for the month of January 2015
@@ -68,8 +65,7 @@ tail(trains_df)
 💻Create a histogram to visualize the distribution of average journey time:
 
 ```{r}
-ggplot(trains_df, aes(x = journey_time_avg)) +
-  geom_histogram(bins = 20)
+# YOUR CODE HERE
 ```
 
 We can see that the distribution of average journey time is right-skewed.
@@ -91,9 +87,7 @@ Scatter plots are a powerful way to visualize the relationship between two conti
 💻Create a scatter plot to visualize the relationship between the average journey time and the number of trains that departed late:
 
 ```{r}
-trains_df |> 
-  ggplot(aes(x = journey_time_avg, y = num_late_at_departure)) +
-  geom_point()
+# YOUR CODE HERE
 ```
 
 Sometimes, when data points overlap too much, it can be challenging to see the individual points. This is called overplotting.
@@ -101,22 +95,13 @@ Sometimes, when data points overlap too much, it can be challenging to see the i
 💻To address this, adjust the transparency of the points using the `alpha` argument:
 
 ```{r}
-trains_df |> 
-  ggplot(aes(x = journey_time_avg, y = num_late_at_departure)) +
-  geom_point(alpha = 0.2)
+# YOUR CODE HERE
 ```
 
 💻Make the plot more visually appealing by changing the colour of the points and adding a title and axis labels:
 
 ```{r}
-trains_df |> 
-  ggplot(aes(x = journey_time_avg, y = num_late_at_departure)) +
-  geom_point(alpha = 0.2, colour = "#3182bd") +
-  labs(
-    title = "French train punctuality",
-    x = "Average journey time (minutes)",
-    y = "Number of trains that departed late"
-  )
+# YOUR CODE HERE
 ```
 
 #### 📝**Exercise 1**
@@ -124,9 +109,7 @@ trains_df |>
 Create a scatter plot to visualize the relationship between two other continuous variables in the data. This time, change the default size of the points by using the `size` argument. The default size is 1.5, but we can increase or decrease this value to make the points bigger or smaller.
 
 ```{r}
-trains_df |> 
-  ggplot(aes(x = total_num_trips, y = num_late_at_departure)) +
-  geom_point(size = 0.1)
+# YOUR CODE HERE
 ```
 
 ## 4️⃣Bar plots
@@ -136,13 +119,7 @@ Bar plots are also commonly used in data analysis. They are particular useful fo
 💻Create a bar plot to show the number of departures from "PARIS NORD" in 2015 by arrival station:
 
 ```{r}
-trains_df |> 
-  filter(departure_station == "PARIS NORD",
-         year == 2015) |> 
-  group_by(arrival_station) |> 
-  summarise(n = sum(total_num_trips)) |> 
-  ggplot(aes(x = arrival_station, y = n)) +
-  geom_bar(stat = "identity")
+# YOUR CODE HERE
 ```
 
 Here, `stat = "identity"` tells ggplot2 to take the `n` column as it is and use it for the height of the bars.
@@ -150,14 +127,7 @@ Here, `stat = "identity"` tells ggplot2 to take the `n` column as it is and use 
 💻Create a grouped bar plot to compare the number of departures from "PARIS NORD" in 2015 and 2016, by arrival station:
 
 ```{r}
-paris_1516_plt <- trains_df |> 
-  filter(departure_station == "PARIS NORD", 
-         year %in% c(2015, 2016)) |>
-  mutate(year = as.factor(year)) |> 
-  group_by(year, arrival_station) |> 
-  summarise(n = sum(total_num_trips), .groups = "drop") |> 
-  ggplot(aes(x = arrival_station, y = n, fill = year)) +
-  geom_bar(stat = "identity", position = "dodge")
+# YOUR CODE HERE
 ```
 
 Breaking down the code:
@@ -171,8 +141,7 @@ Breaking down the code:
 💻Customize fill colours manually:
 
 ```{r}
-paris_1516_plt +
-  scale_fill_manual(values = c("2015" = "gold", "2016" = "royalblue"))
+# YOUR CODE HERE
 ```
 
 Pre-made colour palettes, such as those from the [RColorBrewer](https://r-graph-gallery.com/38-rcolorbrewers-palettes.html) package, offer a variety of well-tested colour schemes that are often aesthetically pleasing. These palettes are useful for ensuring good contrast and consistency across visualizations.
@@ -180,14 +149,13 @@ Pre-made colour palettes, such as those from the [RColorBrewer](https://r-graph-
 💻Display available palettes:
 
 ```{r}
-display.brewer.all()
+# YOUR CODE HERE
 ```
 
 💻Pick and apply a qualitative palette from RColorBrewer:
 
 ```{r}
-paris_1516_plt +
-  scale_fill_brewer(palette = "Accent")
+# YOUR CODE HERE
 ```
 
 In ggplot2, the `scale_{aesthetic}_{type}()` functions control how data values are mapped to aesthetic properties like colour and fill.
@@ -201,14 +169,7 @@ On the other hand, `scale_colour_{type}()` functions are used to adjust the colo
 Create a bar plot to show the number of departures from "NANTES" in 2018 by arrival station. Use the [`scale_fill_brewer()`](https://ggplot2.tidyverse.org/reference/scale_brewer.html) function to apply a qualitative palette accessible to colorblind viewers. Hint: You can call `display.brewer.allcolorblindFriendly=TRUE)` to retrieve a list of appropriate palettes.
 
 ```{r}
-trains_df |> 
-  filter(departure_station == "NANTES",
-         year == 2018) |> 
-  group_by(arrival_station) |> 
-  summarise(n = sum(total_num_trips)) |> 
-  ggplot(aes(x = arrival_station, y = n, fill = arrival_station)) +
-  geom_bar(stat = "identity") +
-  scale_fill_brewer(palette = "Paired") 
+# YOUR CODE HERE
 ```
 
 ## 5️⃣Line plots
@@ -218,18 +179,13 @@ Line plots are useful in data analysis for visualizing trends over time.
 💻Create a date column:
 
 ```{r}
-trains_df <- trains_df |> 
-  mutate(date = make_date(year, month, "1"))
+# YOUR CODE HERE
 ```
 
 💻Create a line plot to show how the monthly number of trips from "PARIS MONTPARNASSE" to "BREST" fluctuates over time:
 
 ```{r}
-trains_df |> 
-  filter(departure_station == "PARIS MONTPARNASSE",
-         arrival_station == "BREST") |> 
-  ggplot(aes(x = date, y = total_num_trips)) +
-  geom_line()
+# YOUR CODE HERE
 ```
 
 Instead of working with separate `year` and `month` columns, we create a single date column in the format `yyyy-mm–01` to handle the continuous time data. This results in smoother scaling, correct chronological ordering, and more precise formatting of the axis labels, making the time-based trends much cleaner.
@@ -239,11 +195,7 @@ Instead of working with separate `year` and `month` columns, we create a single 
 ```{r}
 cities <- c("RENNES", "BREST", "QUIMPER")
 
-brittany_plt <- trains_df |> 
-  filter(departure_station == "PARIS MONTPARNASSE",
-         arrival_station %in% cities) |> 
-  ggplot(aes(x = date, y = total_num_trips, colour = arrival_station)) +
-  geom_line()
+# YOUR CODE HERE
 ```
 
 The `colour` argument in `aes()` maps the `arrival_station` variable to the line colours.
@@ -255,8 +207,7 @@ Fun fact: Rennes has the most frequent service because trains departing from Par
 💻Enhance the existing line plot by by making the x-axis labels more detailed:
 
 ```{r}
-brittany_plt <- brittany_plt +
-  scale_x_date(date_labels = "%b %Y", date_breaks = "4 months")
+# YOUR CODE HERE
 ```
 
 The `date_labels` argument allows us to customize the format to show both the month and the year, while `date_breaks` sets the interval for the labels to appear every 4 months.
@@ -266,8 +217,7 @@ The `scale_x_{type}()` and `scale_y_{type}` functions allow us to customize how 
 💻Further enhance the line plot by applying a different theme to change its overall look and feel:
 
 ```{r}
-brittany_plt +
-  theme_minimal()
+# YOUR CODE HERE
 ```
 
 ggplot2 offers [various themes](https://ggplot2.tidyverse.org/reference/ggtheme.html) that we can use to match the style we're aiming for.
@@ -275,7 +225,7 @@ ggplot2 offers [various themes](https://ggplot2.tidyverse.org/reference/ggtheme.
 ## 6️⃣Saving our plots
 
 ```{r}
-ggsave(filename = "brittany.png", plot = brittany_plt)
+# YOUR CODE HERE
 ```
 
 If we don't specify the `plot` argument, the function will save the last plot displayed by default.
