@@ -1,10 +1,10 @@
 # Introduction to dplyr
 Reiko Okamoto
-2024-09-13
+2024-09-16
 
 ## 👋Welcome to the tidyverse
 
-#### ***What is the tidyverse?***
+#### *What is the tidyverse?*
 
 The [tidyverse](https://tidyverse.tidyverse.org/) is a collection of R
 packages designed for data science. Arguably, two of the most popular
@@ -12,7 +12,7 @@ packages in the tidyverse are [dplyr](https://dplyr.tidyverse.org/) for
 data manipulation and [ggplot2](https://ggplot2.tidyverse.org/) for data
 visualization. These are also two of the packages we are covering today!
 
-***Why learn it?***
+#### *Why learn it?*
 
 The skills you gain are not just limited to R. The concepts, like
 filtering data and creating plots, are applicable to other languages
@@ -21,7 +21,7 @@ languages later. Additionally, the tidyverse is in tune with open
 science practices, helping you create analyses that are more accessible,
 transparent, and reproducible.
 
-***Keep in mind…***
+#### *Keep in mind…*
 
 There’s no expectation for you to memorize everything. Even experienced
 programmers don’t have every function memorized - they’re constantly
@@ -695,22 +695,6 @@ penguins |>
 The function creates a new data frame with a single row containing the
 summary statistic.
 
-💻Calculate the minimum and maximum of body mass at the same time:
-
-``` r
-penguins |> 
-  summarise(min_body_mass = min(body_mass_g, na.rm = TRUE),
-            max_body_mass = max(body_mass_g, na.rm = TRUE))
-```
-
-    # A tibble: 1 × 2
-      min_body_mass max_body_mass
-              <int>         <int>
-    1          2700          6300
-
-Similar to what we’ve seen in other functions, we can create multiple
-summaries in a single step by separating them with commas.
-
 ## 7️⃣Group by one or more variables: group_by()
 
 In data analysis, a common task is to split our data into groups, apply
@@ -756,21 +740,9 @@ penguins |>
     2 Dream       124
     3 Torgersen    52
 
-💻Achieve this count using the
+Alternatively, use the
 [`count()`](https://dplyr.tidyverse.org/reference/count.html) function,
-which combines `group_by()` and `tally()` in one step:
-
-``` r
-penguins |> 
-  count(island)
-```
-
-    # A tibble: 3 × 2
-      island        n
-      <fct>     <int>
-    1 Biscoe      168
-    2 Dream       124
-    3 Torgersen    52
+which combines `group_by()` and `tally()` in one step.
 
 💻Calculate the mean and standard deviation of body mass for each
 combination of species and sex:
@@ -801,7 +773,7 @@ penguins |>
 By default, when we apply a grouping with multiple factors, dplyr will
 keep the last level of grouping after the summary. Here, the output is
 still grouped by `species`. To remove grouping from a data frame, use
-the `ungroup()` function or the `.groups  = "drop"` argument in the
+the `ungroup()` function or the `.groups = "drop"` argument in the
 `summarise()` function. Both methods will allow us to continue working
 with the data as a regular data frame.
 
@@ -837,6 +809,9 @@ df <- penguins |>
             sd_body_mass = sd(body_mass_g, na.rm = TRUE),
             .groups = "drop")
 ```
+
+Similar to what we’ve seen in other functions, we can create multiple
+summaries in a single step by separating them with commas.
 
 ## 8️⃣Sort rows and extract specific values: arrange(), slice(), pull()
 

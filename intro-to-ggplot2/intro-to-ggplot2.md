@@ -1,6 +1,6 @@
 # Introduction to ggplot2
 Reiko Okamoto
-2024-09-13
+2024-09-16
 
 ## 🎨Introduction to ggplot2
 

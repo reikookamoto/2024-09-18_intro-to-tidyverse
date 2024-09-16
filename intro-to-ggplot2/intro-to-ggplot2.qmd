@@ -4,11 +4,9 @@ author: "Reiko Okamoto"
 date: "`r Sys.Date()`"
 format: gfm
 editor: visual
+execute:
+  echo: true
 ---
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
 ## 🎨Introduction to ggplot2
 
@@ -37,7 +35,7 @@ trains_df
 🧠Explore the type and description of each variable:
 
 | Variable                  | Type      | Description                          |
-|-----------------------|------------------|-------------------------------|
+|---------------------------|-----------|--------------------------------------|
 | `year`                    | double    | Year of observation                  |
 | `month`                   | double    | Month of observation                 |
 | `service`                 | character | Type of service                      |

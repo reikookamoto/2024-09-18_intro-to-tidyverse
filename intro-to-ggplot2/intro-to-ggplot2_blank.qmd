@@ -4,11 +4,9 @@ author: "Reiko Okamoto"
 date: "`r Sys.Date()`"
 format: gfm
 editor: visual
+execute:
+  echo: true
 ---
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
 ## 🎨Introduction to ggplot2
 
@@ -35,7 +33,7 @@ We'll use a data set sourced from a [GitHub repository](https://github.com/rford
 🧠Explore the type and description of each variable:
 
 | Variable                  | Type      | Description                          |
-|-----------------------|------------------|-------------------------------|
+|-----------------------|----------------|---------------------------------|
 | `year`                    | double    | Year of observation                  |
 | `month`                   | double    | Month of observation                 |
 | `service`                 | character | Type of service                      |
@@ -193,8 +191,6 @@ Instead of working with separate `year` and `month` columns, we create a single 
 💻Create a line plot to show how the monthly number of trips from "PARIS MONTPARNASSE" to multiple cities in Brittany (i.e., "RENNES", "BREST", "QUIMPER") fluctuates throughout the year:
 
 ```{r}
-cities <- c("RENNES", "BREST", "QUIMPER")
-
 # YOUR CODE HERE
 ```
 

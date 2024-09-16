@@ -1,6 +1,6 @@
 # More ggplot2
 Reiko Okamoto
-2024-08-22
+2024-09-16
 
 I can only fit so much into a three-hour workshop! In this document,
 we’ll use the same data set of French train delays to explore additional

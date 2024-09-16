@@ -4,23 +4,21 @@ author: "Reiko Okamoto"
 date: "`r Sys.Date()`"
 format: gfm
 editor: visual
+execute:
+  echo: true
 ---
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
 ## 👋Welcome to the tidyverse
 
-#### ***What is the tidyverse?***
+#### *What is the tidyverse?*
 
 The [tidyverse](https://tidyverse.tidyverse.org/) is a collection of R packages designed for data science. Arguably, two of the most popular packages in the tidyverse are [dplyr](https://dplyr.tidyverse.org/) for data manipulation and [ggplot2](https://ggplot2.tidyverse.org/) for data visualization. These are also two of the packages we are covering today!
 
-***Why learn it?***
+#### *Why learn it?*
 
 The skills you gain are not just limited to R. The concepts, like filtering data and creating plots, are applicable to other languages like SQL and Python. This makes it easier to pick up other tools and languages later. Additionally, the tidyverse is in tune with open science practices, helping you create analyses that are more accessible, transparent, and reproducible.
 
-***Keep in mind...***
+#### *Keep in mind...*
 
 There's no expectation for you to memorize everything. Even experienced programmers don't have every function memorized - they're constantly googling things! My goal today is to help you get comfortable with, and hopefully interested in, using the tidyverse for data analysis.
 
@@ -132,9 +130,9 @@ The vertical bar acts as an OR operator, meaning a row is returned if any of the
 
 3.  Filter the data to find all penguins that are either on Biscoe Island or Torgersen Island.
 
-```{r}
-# YOUR CODE HERE
-```
+    ```{r}
+    # YOUR CODE HERE
+    ```
 
 ## 4️⃣Pipes
 
@@ -206,9 +204,9 @@ By separating the new columns with a comma, we can create multiple new variables
 
 2.  Create a new column called `flipper_size` that categorizes penguins as short, average, or long based on their `flipper_length_mm`. Hint: Define short as less than 190 mm, average as between 190 and 210 mm, and long as greater than 210 mm.
 
-```{r}
-# YOUR CODE HERE
-```
+    ```{r}
+    # YOUR CODE HERE
+    ```
 
 ## 6️⃣Compute summary statistics: summarise()
 
@@ -221,14 +219,6 @@ We often need to summarize our data to understand key characteristics (e.g., mea
 ```
 
 The function creates a new data frame with a single row containing the summary statistic.
-
-💻Calculate the minimum and maximum of body mass at the same time:
-
-```{r}
-# YOUR CODE HERE
-```
-
-Similar to what we've seen in other functions, we can create multiple summaries in a single step by separating them with commas.
 
 ## 7️⃣Group by one or more variables: group_by()
 
@@ -248,11 +238,7 @@ A grouped data frame has all the properties of a regular data frame but has an a
 # YOUR CODE HERE
 ```
 
-💻Achieve this count using the [`count()`](https://dplyr.tidyverse.org/reference/count.html) function, which combines `group_by()` and `tally()` in one step:
-
-```{r}
-# YOUR CODE HERE
-```
+Alternatively, use the [`count()`](https://dplyr.tidyverse.org/reference/count.html) function, which combines `group_by()` and `tally()` in one step.
 
 💻Calculate the mean and standard deviation of body mass for each combination of species and sex:
 
@@ -260,11 +246,13 @@ A grouped data frame has all the properties of a regular data frame but has an a
 # YOUR CODE HERE
 ```
 
-By default, when we apply a grouping with multiple factors, dplyr will keep the last level of grouping after the summary. Here, the output is still grouped by `species`. To remove grouping from a data frame, use the `ungroup()` function or the `.groups  = "drop"` argument in the `summarise()` function. Both methods will allow us to continue working with the data as a regular data frame.
+By default, when we apply a grouping with multiple factors, dplyr will keep the last level of grouping after the summary. Here, the output is still grouped by `species`. To remove grouping from a data frame, use the `ungroup()` function or the `.groups = "drop"` argument in the `summarise()` function. Both methods will allow us to continue working with the data as a regular data frame.
 
 ```{r}
 # YOUR CODE HERE
 ```
+
+Similar to what we've seen in other functions, we can create multiple summaries in a single step by separating them with commas.
 
 ## 8️⃣Sort rows and extract specific values: arrange(), slice(), pull()
 
@@ -307,13 +295,7 @@ Imagine our observation of interest is the measurement itself, rather than the p
 💻Use the [`pivot_longer()`](https://tidyr.tidyverse.org/reference/pivot_longer.html) function to reshape the `penguins` data so that all the measurements related to the penguins are in a single column, and another column indicates what measurement type it is:
 
 ```{r}
-penguins_long <- penguins |> 
-  mutate(id = row_number()) |> 
-  pivot_longer(
-    cols = ends_with("_mm") | ends_with("_g"),
-    names_to = "measurement_type",
-    values_to = "value"
-  )
+# YOUR CODE HERE
 ```
 
 What if we want to go back to the original wide format?
@@ -321,17 +303,13 @@ What if we want to go back to the original wide format?
 💻Use the [`pivot_wider()`](https://tidyr.tidyverse.org/reference/pivot_wider.html) function to reverse the process:
 
 ```{r}
-penguins_wide <- penguins_long |> 
-  pivot_wider(
-    names_from = measurement_type,
-    values_from = value
-)
+# YOUR CODE HERE
 ```
 
 ## 📚Resources
 
 | Function                | Description                                      |
-|-------------------------|--------------------------------------------------|
+|------------------------|-----------------------------------------------|
 | `dplyr::glimpse()`      | Get a glimpse of your data                       |
 | `dplyr::select()`       | Keep or drop columns using their names and types |
 | `dplyr::filter()`       | Keep rows that match a condition                 |
